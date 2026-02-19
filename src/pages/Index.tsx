@@ -4,91 +4,39 @@ import {
   Clock, 
   AlertTriangle, 
   TrendingUp,
-  Sparkles 
+  Sparkles,
+  Timer,
+  BarChart3
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { StatsCard } from "@/components/dashboard/StatsCard";
 import { WeekView } from "@/components/dashboard/WeekView";
 import { UpcomingAssessments } from "@/components/dashboard/UpcomingAssessments";
 import { FocusTips } from "@/components/dashboard/FocusTips";
+import { MoodTracker } from "@/components/dashboard/MoodTracker";
+import { StreakWidget } from "@/components/dashboard/StreakWidget";
+import { SubjectBreakdown } from "@/components/dashboard/SubjectBreakdown";
 import { TaskCard, Task } from "@/components/tasks/TaskCard";
 import { QuickAddTask } from "@/components/tasks/QuickAddTask";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { addDays } from "date-fns";
 
-// Sample data - in a real app, this would come from a database
 const initialTasks: Task[] = [
-  {
-    id: "1",
-    title: "Complete English essay on Shakespeare's Hamlet",
-    subject: "English",
-    dueDate: new Date(),
-    priority: "high",
-    completed: false,
-    type: "assignment",
-  },
-  {
-    id: "2",
-    title: "Math Chapter 7 Problems (pg 145-150)",
-    subject: "Mathematics",
-    dueDate: addDays(new Date(), 1),
-    priority: "medium",
-    completed: false,
-    type: "assignment",
-  },
-  {
-    id: "3",
-    title: "Science Lab Report - Chemical Reactions",
-    subject: "Science",
-    dueDate: addDays(new Date(), 2),
-    priority: "high",
-    completed: false,
-    type: "assignment",
-  },
-  {
-    id: "4",
-    title: "History Reading - World War II",
-    subject: "History",
-    dueDate: addDays(new Date(), 3),
-    priority: "low",
-    completed: true,
-    type: "assignment",
-  },
-  {
-    id: "5",
-    title: "Art Project Sketch Draft",
-    subject: "Art",
-    dueDate: addDays(new Date(), 5),
-    priority: "medium",
-    completed: false,
-    type: "assignment",
-  },
+  { id: "1", title: "Complete English essay on Shakespeare's Hamlet", subject: "English", dueDate: new Date(), priority: "high", completed: false, type: "assignment" },
+  { id: "2", title: "Math Chapter 7 Problems (pg 145-150)", subject: "Mathematics", dueDate: addDays(new Date(), 1), priority: "medium", completed: false, type: "assignment" },
+  { id: "3", title: "Science Lab Report - Chemical Reactions", subject: "Science", dueDate: addDays(new Date(), 2), priority: "high", completed: false, type: "assignment" },
+  { id: "4", title: "History Reading - World War II", subject: "History", dueDate: addDays(new Date(), 3), priority: "low", completed: true, type: "assignment" },
+  { id: "5", title: "Art Project Sketch Draft", subject: "Art", dueDate: addDays(new Date(), 5), priority: "medium", completed: false, type: "assignment" },
+  { id: "6", title: "Python Coding Challenge", subject: "Computer Science", dueDate: addDays(new Date(), 1), priority: "high", completed: false, type: "assignment" },
 ];
 
 const initialAssessments = [
-  {
-    id: "a1",
-    title: "Algebra Unit Test",
-    subject: "Mathematics",
-    date: addDays(new Date(), 2),
-    preparationProgress: 45,
-    topics: ["Quadratic Equations", "Factoring", "Graphing"],
-  },
-  {
-    id: "a2",
-    title: "Science Quiz - Periodic Table",
-    subject: "Science",
-    date: addDays(new Date(), 5),
-    preparationProgress: 70,
-    topics: ["Elements", "Atomic Structure"],
-  },
-  {
-    id: "a3",
-    title: "English Literature Essay",
-    subject: "English",
-    date: addDays(new Date(), 7),
-    preparationProgress: 20,
-    topics: ["Analysis", "Themes", "Character Study"],
-  },
+  { id: "a1", title: "Algebra Unit Test", subject: "Mathematics", date: addDays(new Date(), 2), preparationProgress: 45, topics: ["Quadratic Equations", "Factoring", "Graphing"] },
+  { id: "a2", title: "Science Quiz - Periodic Table", subject: "Science", date: addDays(new Date(), 5), preparationProgress: 70, topics: ["Elements", "Atomic Structure"] },
+  { id: "a3", title: "English Literature Essay", subject: "English", date: addDays(new Date(), 7), preparationProgress: 20, topics: ["Analysis", "Themes", "Character Study"] },
 ];
 
 const Index = () => {
@@ -101,111 +49,110 @@ const Index = () => {
   };
 
   const addTask = (newTask: Omit<Task, "id" | "completed">) => {
-    const task: Task = {
-      ...newTask,
-      id: Date.now().toString(),
-      completed: false,
-    };
+    const task: Task = { ...newTask, id: Date.now().toString(), completed: false };
     setTasks([task, ...tasks]);
   };
 
   const pendingTasks = tasks.filter(t => !t.completed);
   const completedTasks = tasks.filter(t => t.completed);
   const urgentTasks = pendingTasks.filter(t => t.priority === "high");
-  const todayTasks = pendingTasks.filter(t => {
-    const today = new Date();
-    return t.dueDate.toDateString() === today.toDateString();
-  });
+  const todayTasks = pendingTasks.filter(t => t.dueDate.toDateString() === new Date().toDateString());
 
-  // Get current time for greeting
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
 
   return (
     <MainLayout>
-      <div className="space-y-8 animate-fade-in">
-        {/* Header */}
+      <div className="space-y-6 animate-fade-in">
         <header className="pt-8 lg:pt-0">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
-                {greeting}! 👋
-              </h1>
-              <p className="text-muted-foreground mt-1">
-                Here's what you need to focus on today
-              </p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">{greeting}! 👋</h1>
+              <p className="text-muted-foreground mt-1">Here's what you need to focus on today</p>
             </div>
             <QuickAddTask onAdd={addTask} />
           </div>
         </header>
 
-        {/* Stats Grid */}
+        {/* Stats */}
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard
-            title="Due Today"
-            value={todayTasks.length}
-            subtitle="tasks need attention"
-            icon={Clock}
-            variant={todayTasks.length > 0 ? "warning" : "default"}
-          />
-          <StatsCard
-            title="Urgent"
-            value={urgentTasks.length}
-            subtitle="high priority tasks"
-            icon={AlertTriangle}
-            variant={urgentTasks.length > 0 ? "primary" : "default"}
-          />
-          <StatsCard
-            title="Completed"
-            value={completedTasks.length}
-            subtitle="tasks done this week"
-            icon={CheckCircle2}
-            variant="success"
-            trend={{ value: 15, positive: true }}
-          />
-          <StatsCard
-            title="Focus Score"
-            value="85%"
-            subtitle="based on completion rate"
-            icon={TrendingUp}
-            variant="primary"
-          />
+          <StatsCard title="Due Today" value={todayTasks.length} subtitle="tasks need attention" icon={Clock} variant={todayTasks.length > 0 ? "warning" : "default"} />
+          <StatsCard title="Urgent" value={urgentTasks.length} subtitle="high priority" icon={AlertTriangle} variant={urgentTasks.length > 0 ? "primary" : "default"} />
+          <StatsCard title="Completed" value={completedTasks.length} subtitle="tasks done" icon={CheckCircle2} variant="success" trend={{ value: 15, positive: true }} />
+          <StatsCard title="Focus Score" value="85%" subtitle="completion rate" icon={TrendingUp} variant="primary" />
         </section>
 
-        {/* Week View */}
+        {/* Streak + Mood */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          <StreakWidget currentStreak={12} longestStreak={28} todayComplete={completedTasks.length > 0} />
+          <FocusTips />
+        </div>
+
         <WeekView tasks={tasks} />
 
-        {/* Main Content Grid */}
+        {/* Quick Actions */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <Link to="/pomodoro">
+            <Card className="hover-lift cursor-pointer border-primary/20 bg-primary/5">
+              <CardContent className="p-4 flex items-center gap-3">
+                <Timer className="h-5 w-5 text-primary" />
+                <span className="font-medium text-sm">Start Focus Timer</span>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/notes">
+            <Card className="hover-lift cursor-pointer border-info/20 bg-info/5">
+              <CardContent className="p-4 flex items-center gap-3">
+                <Sparkles className="h-5 w-5 text-info" />
+                <span className="font-medium text-sm">Study Notes</span>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/grades">
+            <Card className="hover-lift cursor-pointer border-success/20 bg-success/5">
+              <CardContent className="p-4 flex items-center gap-3">
+                <BarChart3 className="h-5 w-5 text-success" />
+                <span className="font-medium text-sm">View Grades</span>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/goals">
+            <Card className="hover-lift cursor-pointer border-warning/20 bg-warning/5">
+              <CardContent className="p-4 flex items-center gap-3">
+                <CheckCircle2 className="h-5 w-5 text-warning" />
+                <span className="font-medium text-sm">Track Goals</span>
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
+
+        {/* Main Grid */}
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Tasks Section */}
           <section className="lg:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-primary" />
                 Your Tasks
               </h2>
-              <span className="text-sm text-muted-foreground">
-                {pendingTasks.length} pending
-              </span>
+              <span className="text-sm text-muted-foreground">{pendingTasks.length} pending</span>
             </div>
-
             <div className="space-y-3 stagger-children">
-              {pendingTasks.slice(0, 5).map((task) => (
+              {pendingTasks.slice(0, 6).map((task) => (
                 <TaskCard key={task.id} task={task} onToggle={toggleTask} />
               ))}
               {pendingTasks.length === 0 && (
                 <div className="text-center py-12 text-muted-foreground">
                   <CheckCircle2 className="h-12 w-12 mx-auto mb-4 text-success" />
                   <p className="font-medium">All caught up!</p>
-                  <p className="text-sm">You've completed all your tasks. Great job!</p>
+                  <p className="text-sm">Great job!</p>
                 </div>
               )}
             </div>
           </section>
 
-          {/* Sidebar */}
           <aside className="space-y-6">
-            <FocusTips />
+            <MoodTracker />
+            <SubjectBreakdown />
             <UpcomingAssessments assessments={initialAssessments} />
           </aside>
         </div>

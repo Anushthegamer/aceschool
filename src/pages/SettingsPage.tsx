@@ -21,8 +21,8 @@ const SettingsPage = () => {
   });
   const [profile, setProfile] = useState({
     name: "Student",
-    school: "Edison School",
-    grade: "10",
+    school: "Edison Middle School",
+    grade: "8",
     email: "",
   });
   const [notifications, setNotifications] = useState({

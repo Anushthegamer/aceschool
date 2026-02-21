@@ -6,7 +6,11 @@ import {
   TrendingUp,
   Sparkles,
   Timer,
-  BarChart3
+  BarChart3,
+  Layers,
+  Brain,
+  FolderOpen,
+  Calendar
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
@@ -25,18 +29,18 @@ import { Badge } from "@/components/ui/badge";
 import { addDays } from "date-fns";
 
 const initialTasks: Task[] = [
-  { id: "1", title: "Complete English essay on Shakespeare's Hamlet", subject: "English", dueDate: new Date(), priority: "high", completed: false, type: "assignment" },
-  { id: "2", title: "Math Chapter 7 Problems (pg 145-150)", subject: "Mathematics", dueDate: addDays(new Date(), 1), priority: "medium", completed: false, type: "assignment" },
-  { id: "3", title: "Science Lab Report - Chemical Reactions", subject: "Science", dueDate: addDays(new Date(), 2), priority: "high", completed: false, type: "assignment" },
-  { id: "4", title: "History Reading - World War II", subject: "History", dueDate: addDays(new Date(), 3), priority: "low", completed: true, type: "assignment" },
-  { id: "5", title: "Art Project Sketch Draft", subject: "Art", dueDate: addDays(new Date(), 5), priority: "medium", completed: false, type: "assignment" },
-  { id: "6", title: "Python Coding Challenge", subject: "Computer Science", dueDate: addDays(new Date(), 1), priority: "high", completed: false, type: "assignment" },
+  { id: "1", title: "Pre-Algebra: Solve linear equations worksheet (pg 178-182)", subject: "Mathematics", dueDate: new Date(), priority: "high", completed: false, type: "assignment" },
+  { id: "2", title: "ELA: Read chapters 12-14 of 'To Kill a Mockingbird'", subject: "English Language Arts", dueDate: addDays(new Date(), 1), priority: "medium", completed: false, type: "assignment" },
+  { id: "3", title: "Science: Cell division lab report – draw and label diagrams", subject: "Science", dueDate: addDays(new Date(), 2), priority: "high", completed: false, type: "assignment" },
+  { id: "4", title: "U.S. History: Read Ch. 5 – Causes of the American Revolution", subject: "U.S. History", dueDate: addDays(new Date(), 3), priority: "low", completed: true, type: "assignment" },
+  { id: "5", title: "Spanish I: Conjugate -AR verbs worksheet", subject: "Spanish", dueDate: addDays(new Date(), 1), priority: "medium", completed: false, type: "assignment" },
+  { id: "6", title: "Art & Design: Sketch perspective drawing draft", subject: "Art", dueDate: addDays(new Date(), 5), priority: "low", completed: false, type: "assignment" },
 ];
 
 const initialAssessments = [
-  { id: "a1", title: "Algebra Unit Test", subject: "Mathematics", date: addDays(new Date(), 2), preparationProgress: 45, topics: ["Quadratic Equations", "Factoring", "Graphing"] },
-  { id: "a2", title: "Science Quiz - Periodic Table", subject: "Science", date: addDays(new Date(), 5), preparationProgress: 70, topics: ["Elements", "Atomic Structure"] },
-  { id: "a3", title: "English Literature Essay", subject: "English", date: addDays(new Date(), 7), preparationProgress: 20, topics: ["Analysis", "Themes", "Character Study"] },
+  { id: "a1", title: "Pre-Algebra Unit 5 Test", subject: "Mathematics", date: addDays(new Date(), 3), preparationProgress: 45, topics: ["Linear Equations", "Slope-Intercept Form", "Graphing Lines"] },
+  { id: "a2", title: "Science Quiz – Cell Biology", subject: "Science", date: addDays(new Date(), 5), preparationProgress: 70, topics: ["Mitosis", "Cell Organelles", "Osmosis"] },
+  { id: "a3", title: "ELA Essay – To Kill a Mockingbird", subject: "English Language Arts", date: addDays(new Date(), 7), preparationProgress: 20, topics: ["Theme Analysis", "Character Study", "MLA Format"] },
 ];
 
 const Index = () => {
@@ -91,36 +95,52 @@ const Index = () => {
         <WeekView tasks={tasks} />
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           <Link to="/pomodoro">
             <Card className="hover-lift cursor-pointer border-primary/20 bg-primary/5">
               <CardContent className="p-4 flex items-center gap-3">
                 <Timer className="h-5 w-5 text-primary" />
-                <span className="font-medium text-sm">Start Focus Timer</span>
+                <span className="font-medium text-sm">Focus Timer</span>
               </CardContent>
             </Card>
           </Link>
-          <Link to="/notes">
+          <Link to="/flashcards">
             <Card className="hover-lift cursor-pointer border-info/20 bg-info/5">
               <CardContent className="p-4 flex items-center gap-3">
-                <Sparkles className="h-5 w-5 text-info" />
-                <span className="font-medium text-sm">Study Notes</span>
+                <Layers className="h-5 w-5 text-info" />
+                <span className="font-medium text-sm">Flashcards</span>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/study-planner">
+            <Card className="hover-lift cursor-pointer border-warning/20 bg-warning/5">
+              <CardContent className="p-4 flex items-center gap-3">
+                <Brain className="h-5 w-5 text-warning" />
+                <span className="font-medium text-sm">Study Planner</span>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/schedule">
+            <Card className="hover-lift cursor-pointer border-success/20 bg-success/5">
+              <CardContent className="p-4 flex items-center gap-3">
+                <Calendar className="h-5 w-5 text-success" />
+                <span className="font-medium text-sm">Schedule</span>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/resources">
+            <Card className="hover-lift cursor-pointer border-destructive/20 bg-destructive/5">
+              <CardContent className="p-4 flex items-center gap-3">
+                <FolderOpen className="h-5 w-5 text-destructive" />
+                <span className="font-medium text-sm">Resources</span>
               </CardContent>
             </Card>
           </Link>
           <Link to="/grades">
-            <Card className="hover-lift cursor-pointer border-success/20 bg-success/5">
+            <Card className="hover-lift cursor-pointer border-primary/20 bg-primary/5">
               <CardContent className="p-4 flex items-center gap-3">
-                <BarChart3 className="h-5 w-5 text-success" />
-                <span className="font-medium text-sm">View Grades</span>
-              </CardContent>
-            </Card>
-          </Link>
-          <Link to="/goals">
-            <Card className="hover-lift cursor-pointer border-warning/20 bg-warning/5">
-              <CardContent className="p-4 flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-warning" />
-                <span className="font-medium text-sm">Track Goals</span>
+                <BarChart3 className="h-5 w-5 text-primary" />
+                <span className="font-medium text-sm">Grades</span>
               </CardContent>
             </Card>
           </Link>

@@ -14,7 +14,11 @@ import {
   Sparkles,
   Settings,
   GraduationCap,
-  ChevronDown
+  ChevronDown,
+  Layers,
+  FolderOpen,
+  Brain,
+  Calendar
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -23,7 +27,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 const mainNav = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/" },
   { icon: CalendarDays, label: "Calendar", path: "/calendar" },
-  { icon: Timer, label: "Pomodoro", path: "/pomodoro" },
+  { icon: Calendar, label: "Class Schedule", path: "/schedule" },
 ];
 
 const academicNav = [
@@ -33,7 +37,11 @@ const academicNav = [
 ];
 
 const toolsNav = [
+  { icon: Timer, label: "Pomodoro", path: "/pomodoro" },
   { icon: StickyNote, label: "Study Notes", path: "/notes" },
+  { icon: Layers, label: "Flashcards", path: "/flashcards" },
+  { icon: Brain, label: "Study Planner", path: "/study-planner" },
+  { icon: FolderOpen, label: "Resources", path: "/resources" },
   { icon: Target, label: "Goals & Habits", path: "/goals" },
 ];
 
@@ -94,7 +102,7 @@ export function Sidebar() {
             </div>
             <div>
               <h1 className="font-bold text-lg text-sidebar-foreground">FocusFlow</h1>
-              <p className="text-xs text-muted-foreground">Stay organized</p>
+              <p className="text-xs text-muted-foreground">8th Grade • Edison</p>
             </div>
           </div>
 

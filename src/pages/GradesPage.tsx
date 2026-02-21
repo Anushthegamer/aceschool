@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 
@@ -24,17 +23,19 @@ interface Grade {
 }
 
 const initialGrades: Grade[] = [
-  { id: "1", title: "Algebra Unit Test", subject: "Mathematics", score: 88, maxScore: 100, type: "test", date: new Date(Date.now() - 86400000 * 7), weight: 3 },
-  { id: "2", title: "Hamlet Essay", subject: "English", score: 42, maxScore: 50, type: "assignment", date: new Date(Date.now() - 86400000 * 5), weight: 2 },
-  { id: "3", title: "Periodic Table Quiz", subject: "Science", score: 18, maxScore: 20, type: "quiz", date: new Date(Date.now() - 86400000 * 3), weight: 1 },
-  { id: "4", title: "WW2 Project", subject: "History", score: 45, maxScore: 50, type: "project", date: new Date(Date.now() - 86400000 * 10), weight: 2 },
-  { id: "5", title: "Geometry Quiz", subject: "Mathematics", score: 15, maxScore: 20, type: "quiz", date: new Date(Date.now() - 86400000 * 2), weight: 1 },
-  { id: "6", title: "Lab Report", subject: "Science", score: 38, maxScore: 40, type: "assignment", date: new Date(Date.now() - 86400000 * 1), weight: 2 },
-  { id: "7", title: "Poetry Analysis", subject: "English", score: 85, maxScore: 100, type: "test", date: new Date(Date.now() - 86400000 * 14), weight: 3 },
-  { id: "8", title: "Python Basics", subject: "Computer Science", score: 95, maxScore: 100, type: "project", date: new Date(Date.now() - 86400000 * 4), weight: 2 },
+  { id: "1", title: "Linear Equations Unit Test", subject: "Mathematics", score: 88, maxScore: 100, type: "test", date: new Date(Date.now() - 86400000 * 7), weight: 3 },
+  { id: "2", title: "TKAM Essay – Theme Analysis", subject: "English Language Arts", score: 42, maxScore: 50, type: "assignment", date: new Date(Date.now() - 86400000 * 5), weight: 2 },
+  { id: "3", title: "Cell Biology Quiz", subject: "Science", score: 18, maxScore: 20, type: "quiz", date: new Date(Date.now() - 86400000 * 3), weight: 1 },
+  { id: "4", title: "American Revolution Project", subject: "U.S. History", score: 45, maxScore: 50, type: "project", date: new Date(Date.now() - 86400000 * 10), weight: 2 },
+  { id: "5", title: "Slope & Y-Intercept Quiz", subject: "Mathematics", score: 15, maxScore: 20, type: "quiz", date: new Date(Date.now() - 86400000 * 2), weight: 1 },
+  { id: "6", title: "Microscope Lab Report", subject: "Science", score: 38, maxScore: 40, type: "assignment", date: new Date(Date.now() - 86400000 * 1), weight: 2 },
+  { id: "7", title: "Poetry Analysis – Langston Hughes", subject: "English Language Arts", score: 85, maxScore: 100, type: "test", date: new Date(Date.now() - 86400000 * 14), weight: 3 },
+  { id: "8", title: "Spanish Verb Conjugation Quiz", subject: "Spanish", score: 28, maxScore: 30, type: "quiz", date: new Date(Date.now() - 86400000 * 4), weight: 1 },
+  { id: "9", title: "Scratch Animation Project", subject: "Computer Science", score: 95, maxScore: 100, type: "project", date: new Date(Date.now() - 86400000 * 6), weight: 2 },
+  { id: "10", title: "Constitution Vocabulary Quiz", subject: "U.S. History", score: 17, maxScore: 20, type: "quiz", date: new Date(Date.now() - 86400000 * 8), weight: 1 },
 ];
 
-const subjects = ["Mathematics", "English", "Science", "History", "Computer Science", "Art", "Geography"];
+const subjects = ["Mathematics", "English Language Arts", "Science", "U.S. History", "Spanish", "Computer Science", "Art"];
 
 function getLetterGrade(percent: number): { grade: string; color: string } {
   if (percent >= 93) return { grade: "A", color: "text-success" };
@@ -59,7 +60,6 @@ const GradesPage = () => {
     setShowAdd(false);
   };
 
-  // Calculate subject averages
   const subjectStats = subjects.map((subject) => {
     const subjectGrades = grades.filter((g) => g.subject === subject);
     if (subjectGrades.length === 0) return null;
@@ -86,7 +86,7 @@ const GradesPage = () => {
         <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-8 lg:pt-0">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Grade Tracker</h1>
-            <p className="text-muted-foreground mt-1">Monitor your academic performance</p>
+            <p className="text-muted-foreground mt-1">Monitor your 8th grade academic performance</p>
           </div>
           <Dialog open={showAdd} onOpenChange={setShowAdd}>
             <DialogTrigger asChild>
@@ -113,23 +113,12 @@ const GradesPage = () => {
                   </Select>
                 </div>
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-xs font-medium">Score</label>
-                    <Input type="number" value={newGrade.score} onChange={(e) => setNewGrade({ ...newGrade, score: parseInt(e.target.value) || 0 })} />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-xs font-medium">Max Score</label>
-                    <Input type="number" value={newGrade.maxScore} onChange={(e) => setNewGrade({ ...newGrade, maxScore: parseInt(e.target.value) || 100 })} />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-xs font-medium">Weight</label>
+                  <div className="space-y-1"><label className="text-xs font-medium">Score</label><Input type="number" value={newGrade.score} onChange={(e) => setNewGrade({ ...newGrade, score: parseInt(e.target.value) || 0 })} /></div>
+                  <div className="space-y-1"><label className="text-xs font-medium">Max Score</label><Input type="number" value={newGrade.maxScore} onChange={(e) => setNewGrade({ ...newGrade, maxScore: parseInt(e.target.value) || 100 })} /></div>
+                  <div className="space-y-1"><label className="text-xs font-medium">Weight</label>
                     <Select value={String(newGrade.weight)} onValueChange={(v) => setNewGrade({ ...newGrade, weight: parseInt(v) })}>
                       <SelectTrigger><SelectValue /></SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1">Low (1x)</SelectItem>
-                        <SelectItem value="2">Medium (2x)</SelectItem>
-                        <SelectItem value="3">High (3x)</SelectItem>
-                      </SelectContent>
+                      <SelectContent><SelectItem value="1">Low (1x)</SelectItem><SelectItem value="2">Medium (2x)</SelectItem><SelectItem value="3">High (3x)</SelectItem></SelectContent>
                     </Select>
                   </div>
                 </div>
@@ -142,15 +131,12 @@ const GradesPage = () => {
           </Dialog>
         </header>
 
-        {/* Overall GPA */}
         <Card variant="elevated" className="bg-primary/5 border-primary/20">
           <CardContent className="p-6">
             <div className="flex flex-col sm:flex-row items-center gap-6">
               <div className="text-center">
                 <Award className="h-10 w-10 text-primary mx-auto mb-2" />
-                <div className={cn("text-5xl font-bold", getLetterGrade(overallAverage).color)}>
-                  {getLetterGrade(overallAverage).grade}
-                </div>
+                <div className={cn("text-5xl font-bold", getLetterGrade(overallAverage).color)}>{getLetterGrade(overallAverage).grade}</div>
                 <p className="text-sm text-muted-foreground mt-1">Overall Grade</p>
               </div>
               <div className="flex-1 w-full">
@@ -168,25 +154,19 @@ const GradesPage = () => {
           </CardContent>
         </Card>
 
-        {/* Subject Cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {subjectStats.map((stat) => (
             <Card key={stat.subject} variant="elevated" className="hover-lift cursor-pointer" onClick={() => setSelectedSubject(stat.subject)}>
               <CardContent className="p-4">
                 <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h4 className="font-semibold text-foreground">{stat.subject}</h4>
-                    <p className="text-xs text-muted-foreground">{stat.count} assessments</p>
-                  </div>
+                  <div><h4 className="font-semibold text-foreground">{stat.subject}</h4><p className="text-xs text-muted-foreground">{stat.count} assessments</p></div>
                   <div className={cn("text-2xl font-bold", stat.letterGrade.color)}>{stat.letterGrade.grade}</div>
                 </div>
                 <div className="flex items-center justify-between text-sm mb-2">
                   <span className="text-muted-foreground">Average</span>
                   <div className="flex items-center gap-1">
                     <span className="font-medium">{stat.average.toFixed(1)}%</span>
-                    {stat.trend > 0.05 ? <TrendingUp className="h-3.5 w-3.5 text-success" /> :
-                     stat.trend < -0.05 ? <TrendingDown className="h-3.5 w-3.5 text-destructive" /> :
-                     <Minus className="h-3.5 w-3.5 text-muted-foreground" />}
+                    {stat.trend > 0.05 ? <TrendingUp className="h-3.5 w-3.5 text-success" /> : stat.trend < -0.05 ? <TrendingDown className="h-3.5 w-3.5 text-destructive" /> : <Minus className="h-3.5 w-3.5 text-muted-foreground" />}
                   </div>
                 </div>
                 <Progress value={stat.average} className="h-2" />
@@ -195,7 +175,6 @@ const GradesPage = () => {
           ))}
         </div>
 
-        {/* Recent Grades */}
         <Card variant="elevated">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -220,9 +199,7 @@ const GradesPage = () => {
                       <h4 className="font-medium text-foreground truncate">{grade.title}</h4>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <Badge variant="subject" className="text-xs">{grade.subject}</Badge>
-                        <span>{grade.type}</span>
-                        <span>•</span>
-                        <span>{format(grade.date, "MMM d")}</span>
+                        <span>{grade.type}</span><span>•</span><span>{format(grade.date, "MMM d")}</span>
                       </div>
                     </div>
                     <div className="text-right">

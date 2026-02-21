@@ -11,69 +11,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { addDays } from "date-fns";
 
 const initialAssignments: Task[] = [
-  {
-    id: "1",
-    title: "Complete English essay on Shakespeare's Hamlet - Analyze the theme of madness",
-    subject: "English",
-    dueDate: new Date(),
-    priority: "high",
-    completed: false,
-    type: "assignment",
-  },
-  {
-    id: "2",
-    title: "Math Chapter 7 Problems (pg 145-150) - Quadratic Equations",
-    subject: "Mathematics",
-    dueDate: addDays(new Date(), 1),
-    priority: "medium",
-    completed: false,
-    type: "assignment",
-  },
-  {
-    id: "3",
-    title: "Science Lab Report - Chemical Reactions Experiment",
-    subject: "Science",
-    dueDate: addDays(new Date(), 2),
-    priority: "high",
-    completed: false,
-    type: "assignment",
-  },
-  {
-    id: "4",
-    title: "History Reading - World War II Chapter 8-10",
-    subject: "History",
-    dueDate: addDays(new Date(), 3),
-    priority: "low",
-    completed: true,
-    type: "assignment",
-  },
-  {
-    id: "5",
-    title: "Art Project - Abstract Painting Draft",
-    subject: "Art",
-    dueDate: addDays(new Date(), 5),
-    priority: "medium",
-    completed: false,
-    type: "assignment",
-  },
-  {
-    id: "6",
-    title: "Computer Science - Python Program Assignment",
-    subject: "Computer Science",
-    dueDate: addDays(new Date(), 4),
-    priority: "high",
-    completed: false,
-    type: "assignment",
-  },
-  {
-    id: "7",
-    title: "Geography Map Project - European Countries",
-    subject: "Geography",
-    dueDate: addDays(new Date(), 6),
-    priority: "low",
-    completed: false,
-    type: "assignment",
-  },
+  { id: "1", title: "Pre-Algebra: Solve linear equations worksheet (pg 178-182)", subject: "Mathematics", dueDate: new Date(), priority: "high", completed: false, type: "assignment" },
+  { id: "2", title: "ELA: Annotate chapters 12-14 of 'To Kill a Mockingbird'", subject: "English Language Arts", dueDate: addDays(new Date(), 1), priority: "medium", completed: false, type: "assignment" },
+  { id: "3", title: "Science: Cell division lab report with labeled diagrams", subject: "Science", dueDate: addDays(new Date(), 2), priority: "high", completed: false, type: "assignment" },
+  { id: "4", title: "U.S. History: Read Ch. 5 — Causes of the American Revolution", subject: "U.S. History", dueDate: addDays(new Date(), 3), priority: "low", completed: true, type: "assignment" },
+  { id: "5", title: "Spanish I: Conjugate -AR verbs and write 5 original sentences", subject: "Spanish", dueDate: addDays(new Date(), 1), priority: "medium", completed: false, type: "assignment" },
+  { id: "6", title: "Art & Design: One-point perspective cityscape drawing", subject: "Art", dueDate: addDays(new Date(), 5), priority: "medium", completed: false, type: "assignment" },
+  { id: "7", title: "Computer Science: Create a Scratch animation project", subject: "Computer Science", dueDate: addDays(new Date(), 4), priority: "low", completed: false, type: "assignment" },
+  { id: "8", title: "Pre-Algebra: Graph 6 linear equations on coordinate plane", subject: "Mathematics", dueDate: addDays(new Date(), 6), priority: "medium", completed: false, type: "assignment" },
+  { id: "9", title: "ELA: Write thesis statement for TKAM essay (MLA format)", subject: "English Language Arts", dueDate: addDays(new Date(), 4), priority: "high", completed: false, type: "assignment" },
+  { id: "10", title: "Science: Complete periodic table element identification sheet", subject: "Science", dueDate: addDays(new Date(), 7), priority: "low", completed: false, type: "assignment" },
 ];
 
 const AssignmentsPage = () => {
@@ -88,11 +35,7 @@ const AssignmentsPage = () => {
   };
 
   const addTask = (newTask: Omit<Task, "id" | "completed">) => {
-    const task: Task = {
-      ...newTask,
-      id: Date.now().toString(),
-      completed: false,
-    };
+    const task: Task = { ...newTask, id: Date.now().toString(), completed: false };
     setAssignments([task, ...assignments]);
   };
 
@@ -114,34 +57,21 @@ const AssignmentsPage = () => {
         <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-8 lg:pt-0">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Assignments</h1>
-            <p className="text-muted-foreground mt-1">
-              Manage all your homework and projects in one place
-            </p>
+            <p className="text-muted-foreground mt-1">Manage all your homework and projects in one place</p>
           </div>
           <QuickAddTask onAdd={addTask} />
         </header>
 
-        {/* Search and Filter */}
         <Card>
           <CardContent className="py-4">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search assignments..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
-                />
+                <Input placeholder="Search assignments..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10" />
               </div>
               <div className="flex gap-2 flex-wrap">
                 {subjects.map(subject => (
-                  <Button
-                    key={subject}
-                    variant={selectedSubject === subject ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedSubject(subject)}
-                  >
+                  <Button key={subject} variant={selectedSubject === subject ? "default" : "outline"} size="sm" onClick={() => setSelectedSubject(subject)}>
                     {subject === "all" ? "All" : subject}
                   </Button>
                 ))}
@@ -150,52 +80,19 @@ const AssignmentsPage = () => {
           </CardContent>
         </Card>
 
-        {/* Tabs for Pending/Completed */}
         <Tabs defaultValue="pending" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="pending" className="gap-2">
-              Pending
-              <Badge variant="warning">{pendingAssignments.length}</Badge>
-            </TabsTrigger>
-            <TabsTrigger value="completed" className="gap-2">
-              Completed
-              <Badge variant="success">{completedAssignments.length}</Badge>
-            </TabsTrigger>
+            <TabsTrigger value="pending" className="gap-2">Pending <Badge variant="warning">{pendingAssignments.length}</Badge></TabsTrigger>
+            <TabsTrigger value="completed" className="gap-2">Completed <Badge variant="success">{completedAssignments.length}</Badge></TabsTrigger>
           </TabsList>
-
           <TabsContent value="pending" className="space-y-3">
-            {pendingAssignments.length > 0 ? (
-              pendingAssignments.map(assignment => (
-                <TaskCard 
-                  key={assignment.id} 
-                  task={assignment} 
-                  onToggle={toggleTask} 
-                />
-              ))
-            ) : (
-              <Card>
-                <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground">No pending assignments found</p>
-                </CardContent>
-              </Card>
+            {pendingAssignments.length > 0 ? pendingAssignments.map(a => <TaskCard key={a.id} task={a} onToggle={toggleTask} />) : (
+              <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">No pending assignments found</p></CardContent></Card>
             )}
           </TabsContent>
-
           <TabsContent value="completed" className="space-y-3">
-            {completedAssignments.length > 0 ? (
-              completedAssignments.map(assignment => (
-                <TaskCard 
-                  key={assignment.id} 
-                  task={assignment} 
-                  onToggle={toggleTask} 
-                />
-              ))
-            ) : (
-              <Card>
-                <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground">No completed assignments yet</p>
-                </CardContent>
-              </Card>
+            {completedAssignments.length > 0 ? completedAssignments.map(a => <TaskCard key={a.id} task={a} onToggle={toggleTask} />) : (
+              <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">No completed assignments yet</p></CardContent></Card>
             )}
           </TabsContent>
         </Tabs>

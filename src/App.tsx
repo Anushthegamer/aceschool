@@ -12,6 +12,10 @@ import NotesPage from "./pages/NotesPage";
 import GoalsPage from "./pages/GoalsPage";
 import GradesPage from "./pages/GradesPage";
 import SettingsPage from "./pages/SettingsPage";
+import FlashcardsPage from "./pages/FlashcardsPage";
+import SchedulePage from "./pages/SchedulePage";
+import ResourcesPage from "./pages/ResourcesPage";
+import StudyPlannerPage from "./pages/StudyPlannerPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +36,10 @@ const App = () => (
           <Route path="/goals" element={<GoalsPage />} />
           <Route path="/grades" element={<GradesPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/flashcards" element={<FlashcardsPage />} />
+          <Route path="/schedule" element={<SchedulePage />} />
+          <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/study-planner" element={<StudyPlannerPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

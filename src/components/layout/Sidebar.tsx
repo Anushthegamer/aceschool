@@ -148,6 +148,9 @@ export function Sidebar() {
           {/* Bottom */}
           <div className="pt-4 border-t border-sidebar-border">
             <NavItem icon={Settings} label="Settings" path="/settings" />
+            <p className="px-3 pt-3 text-[10px] text-muted-foreground/60 text-center leading-tight">
+              Developed by Ramskandh Thirandasu
+            </p>
           </div>
         </div>
       </aside>

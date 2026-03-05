@@ -177,6 +177,9 @@ const Index = () => {
           </aside>
         </div>
       </div>
+      <footer className="mt-8 pt-4 border-t border-border text-center text-xs text-muted-foreground">
+        FocusFlow — Made by Ramskandh Thirandasu
+      </footer>
     </MainLayout>
   );
 };

@@ -233,6 +233,14 @@ const SettingsPage = () => {
             </Card>
           </TabsContent>
         </Tabs>
+
+        <Card className="mt-6">
+          <CardContent className="pt-6 text-center">
+            <p className="text-sm font-medium text-foreground">FocusFlow v1.0</p>
+            <p className="text-xs text-muted-foreground mt-1">Developed by Ramskandh Thirandasu</p>
+            <p className="text-[10px] text-muted-foreground/60 mt-1">© 2026 All rights reserved</p>
+          </CardContent>
+        </Card>
       </div>
     </MainLayout>
   );

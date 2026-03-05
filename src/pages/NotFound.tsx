@@ -16,6 +16,7 @@ const NotFound = () => {
         <a href="/" className="text-primary underline hover:text-primary/90">
           Return to Home
         </a>
+        <p className="mt-6 text-xs text-muted-foreground/60">FocusFlow — Developed by Ramskandh Thirandasu</p>
       </div>
     </div>
   );

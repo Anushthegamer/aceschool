@@ -32,7 +32,7 @@ const PomodoroPage = () => {
   const [pomodoroCount, setPomodoroCount] = useState(0);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const totalTime = customDurations[mode] * 60;
   const progress = ((totalTime - timeLeft) / totalTime) * 100;

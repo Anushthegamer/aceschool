@@ -96,64 +96,63 @@ export function Sidebar() {
 
       <aside
         className={cn(
-          "fixed left-0 top-0 h-full w-64 bg-sidebar border-r border-sidebar-border z-50 transform transition-transform duration-300 ease-out lg:translate-x-0",
+          "lg:relative lg:translate-x-0 lg:h-screen lg:w-full",
+          "fixed left-0 top-0 h-full w-64 bg-sidebar border-r border-sidebar-border z-50 transform transition-transform duration-300 ease-out",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="flex flex-col h-full p-4 overflow-y-auto">
-          {/* Logo */}
           <div className="flex items-center gap-3 px-3 py-4 mb-4">
-            <div className="w-10 h-10 rounded-xl gradient-calm flex items-center justify-center shadow-glow">
+            <div className="w-10 h-10 rounded-xl gradient-calm flex items-center justify-center shadow-glow glitch-icon">
               <Sparkles className="h-5 w-5 text-primary-foreground" />
             </div>
-            <div>
-              <h1 className="font-bold text-lg text-sidebar-foreground">FocusFlow</h1>
-              <p className="text-xs text-muted-foreground">8th Grade • Edison</p>
+            <div className="min-w-0 flex-1">
+              <h1 className="font-bold text-lg text-sidebar-foreground glitch-text" data-text="FocusFlow">FocusFlow</h1>
+              <p className="text-xs text-muted-foreground truncate">8th Grade • Edison</p>
             </div>
           </div>
 
-          {/* Main Nav */}
           <nav className="flex-1 space-y-1">
-            {mainNav.map((item) => (
-              <NavItem key={item.path} {...item} />
-            ))}
+            {mainNav.map((item) => <NavItem key={item.path} {...item} />)}
 
-            {/* Academic Section */}
             <Collapsible open={academicOpen} onOpenChange={setAcademicOpen}>
               <CollapsibleTrigger className="flex items-center justify-between w-full px-3 py-2 mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">
-                <span className="flex items-center gap-2">
-                  <GraduationCap className="h-3.5 w-3.5" />
-                  Academic
-                </span>
+                <span className="flex items-center gap-2"><GraduationCap className="h-3.5 w-3.5" />Academic</span>
                 <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", academicOpen && "rotate-180")} />
               </CollapsibleTrigger>
               <CollapsibleContent className="space-y-1 mt-1">
-                {academicNav.map((item) => (
-                  <NavItem key={item.path} {...item} />
-                ))}
+                {academicNav.map((item) => <NavItem key={item.path} {...item} />)}
               </CollapsibleContent>
             </Collapsible>
 
-            {/* Tools Section */}
             <Collapsible open={toolsOpen} onOpenChange={setToolsOpen}>
               <CollapsibleTrigger className="flex items-center justify-between w-full px-3 py-2 mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">
-                <span className="flex items-center gap-2">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Tools
-                </span>
+                <span className="flex items-center gap-2"><Sparkles className="h-3.5 w-3.5" />Tools</span>
                 <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", toolsOpen && "rotate-180")} />
               </CollapsibleTrigger>
               <CollapsibleContent className="space-y-1 mt-1">
-                {toolsNav.map((item) => (
-                  <NavItem key={item.path} {...item} />
-                ))}
+                {toolsNav.map((item) => <NavItem key={item.path} {...item} />)}
+              </CollapsibleContent>
+            </Collapsible>
+
+            <Collapsible open={schoolOpen} onOpenChange={setSchoolOpen}>
+              <CollapsibleTrigger className="flex items-center justify-between w-full px-3 py-2 mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">
+                <span className="flex items-center gap-2"><School className="h-3.5 w-3.5" />School Life</span>
+                <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", schoolOpen && "rotate-180")} />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="space-y-1 mt-1">
+                {schoolLifeNav.map((item) => <NavItem key={item.path} {...item} />)}
               </CollapsibleContent>
             </Collapsible>
           </nav>
 
-          {/* Bottom */}
-          <div className="pt-4 border-t border-sidebar-border">
+          <div className="pt-4 border-t border-sidebar-border space-y-1">
             <NavItem icon={Settings} label="Settings" path="/settings" />
+            {user && (
+              <button onClick={() => signOut()} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium w-full text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all">
+                <LogOut className="h-5 w-5" />Sign out
+              </button>
+            )}
             <p className="px-3 pt-3 text-[10px] text-muted-foreground/60 text-center leading-tight">
               Developed by Ramskandh Thirandasu
             </p>

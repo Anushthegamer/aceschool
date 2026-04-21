@@ -14,7 +14,287 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      assignments: {
+        Row: {
+          completed: boolean
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          marking_period: number
+          priority: string
+          subject: string
+          title: string
+          type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          marking_period?: number
+          priority?: string
+          subject: string
+          title: string
+          type?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          marking_period?: number
+          priority?: string
+          subject?: string
+          title?: string
+          type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      attendance: {
+        Row: {
+          date: string
+          id: string
+          marking_period: number
+          notes: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          date: string
+          id?: string
+          marking_period?: number
+          notes?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          date?: string
+          id?: string
+          marking_period?: number
+          notes?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      flashcard_decks: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          subject: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          subject?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          subject?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      flashcards: {
+        Row: {
+          back: string
+          created_at: string
+          deck_id: string
+          due_date: string
+          ease: number
+          front: string
+          id: string
+          interval_days: number
+          repetitions: number
+          user_id: string
+        }
+        Insert: {
+          back: string
+          created_at?: string
+          deck_id: string
+          due_date?: string
+          ease?: number
+          front: string
+          id?: string
+          interval_days?: number
+          repetitions?: number
+          user_id: string
+        }
+        Update: {
+          back?: string
+          created_at?: string
+          deck_id?: string
+          due_date?: string
+          ease?: number
+          front?: string
+          id?: string
+          interval_days?: number
+          repetitions?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flashcards_deck_id_fkey"
+            columns: ["deck_id"]
+            isOneToOne: false
+            referencedRelation: "flashcard_decks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      grades: {
+        Row: {
+          assignment_name: string
+          category: string
+          created_at: string
+          id: string
+          marking_period: number
+          max_score: number
+          recorded_on: string
+          score: number
+          subject: string
+          user_id: string
+          weight: number
+        }
+        Insert: {
+          assignment_name: string
+          category?: string
+          created_at?: string
+          id?: string
+          marking_period?: number
+          max_score?: number
+          recorded_on?: string
+          score: number
+          subject: string
+          user_id: string
+          weight?: number
+        }
+        Update: {
+          assignment_name?: string
+          category?: string
+          created_at?: string
+          id?: string
+          marking_period?: number
+          max_score?: number
+          recorded_on?: string
+          score?: number
+          subject?: string
+          user_id?: string
+          weight?: number
+        }
+        Relationships: []
+      }
+      hall_passes: {
+        Row: {
+          destination: string
+          ended_at: string | null
+          id: string
+          reason: string | null
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          destination: string
+          ended_at?: string | null
+          id?: string
+          reason?: string | null
+          started_at?: string
+          user_id: string
+        }
+        Update: {
+          destination?: string
+          ended_at?: string | null
+          id?: string
+          reason?: string | null
+          started_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notes: {
+        Row: {
+          content_html: string
+          created_at: string
+          id: string
+          pinned: boolean
+          subject: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content_html?: string
+          created_at?: string
+          id?: string
+          pinned?: boolean
+          subject?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content_html?: string
+          created_at?: string
+          id?: string
+          pinned?: boolean
+          subject?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string
+          grade: number
+          id: string
+          school: string
+          section: string
+          theme: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string
+          grade?: number
+          id: string
+          school?: string
+          section?: string
+          theme?: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string
+          grade?: number
+          id?: string
+          school?: string
+          section?: string
+          theme?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -11,15 +11,10 @@ import {
   BarChart3,
   Menu, 
   X,
-  Sparkles,
-  Settings,
-  GraduationCap,
-  ChevronDown,
-  Layers,
-  FolderOpen,
-  Brain,
-  Calendar
+  Sparkles, Settings, GraduationCap, ChevronDown, Layers, FolderOpen, Brain, Calendar,
+  Award, TrendingUp, Utensils, Bus, KeyRound, ScrollText, LogOut, School
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -34,6 +29,8 @@ const academicNav = [
   { icon: BookOpen, label: "Assignments", path: "/assignments" },
   { icon: ClipboardCheck, label: "Assessments", path: "/assessments" },
   { icon: BarChart3, label: "Grades", path: "/grades" },
+  { icon: Award, label: "Report Card", path: "/report-card" },
+  { icon: TrendingUp, label: "GPA Projector", path: "/gpa-projector" },
 ];
 
 const toolsNav = [
@@ -45,11 +42,20 @@ const toolsNav = [
   { icon: Target, label: "Goals & Habits", path: "/goals" },
 ];
 
+const schoolLifeNav = [
+  { icon: Utensils, label: "Lunch Menu", path: "/lunch" },
+  { icon: Bus, label: "Bus Tracker", path: "/bus" },
+  { icon: KeyRound, label: "Locker Vault", path: "/locker" },
+  { icon: ScrollText, label: "Hall Pass Log", path: "/hall-pass" },
+];
+
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [academicOpen, setAcademicOpen] = useState(true);
   const [toolsOpen, setToolsOpen] = useState(true);
+  const [schoolOpen, setSchoolOpen] = useState(true);
   const location = useLocation();
+  const { signOut, user } = useAuth();
 
   const NavItem = ({ icon: Icon, label, path }: { icon: typeof LayoutDashboard; label: string; path: string }) => {
     const isActive = location.pathname === path;

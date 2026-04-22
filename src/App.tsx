@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { CommandPalette } from "@/components/CommandPalette";
+import { AiTutorWidget } from "@/components/AiTutorWidget";
 import Index from "./pages/Index";
 import AuthPage from "./pages/AuthPage";
 import CalendarPage from "./pages/CalendarPage";
@@ -34,6 +35,7 @@ const Protected = ({ el }: { el: JSX.Element }) => (
   <ProtectedRoute>
     {el}
     <CommandPalette />
+    <AiTutorWidget />
   </ProtectedRoute>
 );
 

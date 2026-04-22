@@ -5,6 +5,25 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const EDISON_DISTRICT = `
+EDISON TOWNSHIP PUBLIC SCHOOLS (NJ) — DISTRICT INFO
+• Website: edison.k12.nj.us  • One of NJ's largest K-12 districts (~16,000 students, Middlesex County)
+• Superintendent's office, Board of Education meetings posted on district site.
+• Key parent/student systems:
+  - Genesis Parent Portal (parents.edison.k12.nj.us/genesis/parents) — grades, attendance, schedules, report cards.
+  - ParentSquare — district-wide communications and class messaging.
+  - HIB Reporting (Harassment, Intimidation, Bullying) via Hibster reporting portal.
+  - Help Desk for tech / Chromebook / login issues.
+• Food Services: free/reduced lunch applications via district Food Services page; menus published monthly.
+• Transportation: bus routes & eligibility on district Transportation page; questions to Transportation Office.
+• Academies (high school magnet programs): STEM, Performing Arts, Humanities, etc. — application-based for incoming 9th graders.
+• District calendar: posted yearly; includes marking period dates, half-days, holidays (Rosh Hashanah, Yom Kippur, Diwali observed), spring break, and last day of school.
+• Middle Schools include: Herbert Hoover, John Adams, Thomas Jefferson, Woodrow Wilson. High Schools: Edison HJ Schools and JP Stevens HS.
+• Summer programs (K-11): enrichment, sports, academic recovery — registration opens spring.
+
+When Jack asks about district policies, calendar, Genesis, lunch menus, buses, HIB, or his parent portal, give helpful guidance and point him to the right page on edison.k12.nj.us.
+`;
+
 const EDISON_CURRICULUM = `
 EDISON MIDDLE SCHOOL — 8TH GRADE CURRICULUM (2025-2026)
 
@@ -79,6 +98,8 @@ ${(grades || []).map(g => `• [${g.subject}] ${g.assignment_name}: ${g.score}/$
 You have full access to Jack's school data (below) and the Edison Middle School 8th-grade curriculum. Use this context to give specific, personalized help — reference his actual assignments, notes, and grades by name when relevant.
 
 Help Jack with: explaining concepts, breaking down homework, study strategies, summarizing his notes, planning study sessions for upcoming tests, motivation, and answering curriculum questions. Never do his homework for him — guide him to the answer.
+
+${EDISON_DISTRICT}
 
 ${EDISON_CURRICULUM}
 

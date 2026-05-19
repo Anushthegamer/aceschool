@@ -86,6 +86,45 @@ export type Database = {
         }
         Relationships: []
       }
+      clubs: {
+        Row: {
+          advisor: string | null
+          color: string
+          created_at: string
+          day_of_week: number | null
+          id: string
+          kind: string
+          name: string
+          notes: string | null
+          room: string | null
+          user_id: string
+        }
+        Insert: {
+          advisor?: string | null
+          color?: string
+          created_at?: string
+          day_of_week?: number | null
+          id?: string
+          kind?: string
+          name: string
+          notes?: string | null
+          room?: string | null
+          user_id: string
+        }
+        Update: {
+          advisor?: string | null
+          color?: string
+          created_at?: string
+          day_of_week?: number | null
+          id?: string
+          kind?: string
+          name?: string
+          notes?: string | null
+          room?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       flashcard_decks: {
         Row: {
           created_at: string
@@ -292,6 +331,42 @@ export type Database = {
           section?: string
           theme?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      time_blocks: {
+        Row: {
+          category: string
+          completed: boolean
+          created_at: string
+          ends_at: string
+          id: string
+          starts_at: string
+          subject: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          category?: string
+          completed?: boolean
+          created_at?: string
+          ends_at: string
+          id?: string
+          starts_at: string
+          subject?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          completed?: boolean
+          created_at?: string
+          ends_at?: string
+          id?: string
+          starts_at?: string
+          subject?: string | null
+          title?: string
+          user_id?: string
         }
         Relationships: []
       }

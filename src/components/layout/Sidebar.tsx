@@ -12,7 +12,7 @@ import {
   Menu, 
   X,
   Sparkles, Settings, GraduationCap, ChevronDown, Layers, FolderOpen, Brain, Calendar,
-  Award, TrendingUp, Utensils, Bus, KeyRound, ScrollText, LogOut, School
+  Award, TrendingUp, Utensils, Bus, KeyRound, ScrollText, LogOut, School, Users, Clock
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -40,6 +40,7 @@ const toolsNav = [
   { icon: Brain, label: "Study Planner", path: "/study-planner" },
   { icon: FolderOpen, label: "Resources", path: "/resources" },
   { icon: Target, label: "Goals & Habits", path: "/goals" },
+  { icon: Clock, label: "Time Manager", path: "/time-manager" },
 ];
 
 const schoolLifeNav = [
@@ -47,6 +48,7 @@ const schoolLifeNav = [
   { icon: Bus, label: "Bus Tracker", path: "/bus" },
   { icon: KeyRound, label: "Locker Vault", path: "/locker" },
   { icon: ScrollText, label: "Hall Pass Log", path: "/hall-pass" },
+  { icon: Users, label: "Clubs & Electives", path: "/clubs" },
 ];
 
 export function Sidebar() {
@@ -107,7 +109,7 @@ export function Sidebar() {
               <Sparkles className="h-5 w-5 text-primary-foreground" />
             </div>
             <div className="min-w-0 flex-1">
-              <h1 className="font-bold text-lg text-sidebar-foreground glitch-text" data-text="FocusFlow">FocusFlow</h1>
+              <h1 className="font-bold text-lg text-sidebar-foreground glitch-text" data-text="The Planner">The Planner</h1>
               <p className="text-xs text-muted-foreground truncate">8th Grade • Edison</p>
             </div>
           </div>

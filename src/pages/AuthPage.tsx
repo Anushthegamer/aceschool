@@ -46,7 +46,7 @@ export default function AuthPage() {
           <div className="mx-auto w-14 h-14 rounded-2xl gradient-calm flex items-center justify-center shadow-glow mb-3 glitch-icon">
             <Sparkles className="h-7 w-7 text-primary-foreground" />
           </div>
-          <CardTitle className="text-2xl">FocusFlow</CardTitle>
+          <CardTitle className="text-2xl">The Planner</CardTitle>
           <CardDescription>8th Grade • Edison Middle School</CardDescription>
         </CardHeader>
         <CardContent>

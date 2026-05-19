@@ -64,7 +64,7 @@ const SettingsPage = () => {
       <div className="space-y-6 animate-fade-in">
         <header className="pt-8 lg:pt-0">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Settings</h1>
-          <p className="text-muted-foreground mt-1">Customize your FocusFlow experience</p>
+          <p className="text-muted-foreground mt-1">Customize your The Planner experience</p>
         </header>
 
         <Tabs defaultValue="profile" className="space-y-6">
@@ -139,7 +139,7 @@ const SettingsPage = () => {
             <Card variant="elevated">
               <CardHeader>
                 <CardTitle>Theme</CardTitle>
-                <CardDescription>Choose how FocusFlow looks</CardDescription>
+                <CardDescription>Choose how The Planner looks</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-3 gap-4">
@@ -289,7 +289,7 @@ const SettingsPage = () => {
 
         <Card className="mt-6">
           <CardContent className="pt-6 text-center">
-            <p className="text-sm font-medium text-foreground">FocusFlow v2.0</p>
+            <p className="text-sm font-medium text-foreground">The Planner v2.0</p>
             <p className="text-xs text-muted-foreground mt-1">Developed by Ramskandh Thirandasu</p>
             <p className="text-[10px] text-muted-foreground/60 mt-1">© 2026 All rights reserved</p>
           </CardContent>

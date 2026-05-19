@@ -107,7 +107,7 @@ export function Sidebar() {
               <Sparkles className="h-5 w-5 text-primary-foreground" />
             </div>
             <div className="min-w-0 flex-1">
-              <h1 className="font-bold text-lg text-sidebar-foreground glitch-text" data-text="FocusFlow">FocusFlow</h1>
+              <h1 className="font-bold text-lg text-sidebar-foreground glitch-text" data-text="The Planner">The Planner</h1>
               <p className="text-xs text-muted-foreground truncate">8th Grade • Edison</p>
             </div>
           </div>

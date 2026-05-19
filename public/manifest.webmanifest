@@ -1,0 +1,14 @@
+{
+  "name": "The Planner",
+  "short_name": "Planner",
+  "description": "The Planner — Edison student productivity OS. Developed by Ramskandh Thirandasu.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    { "src": "/placeholder.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -29,6 +29,7 @@ import ReportCardPage from "./pages/ReportCardPage";
 import GpaProjectorPage from "./pages/GpaProjectorPage";
 import ClubsPage from "./pages/ClubsPage";
 import TimeManagerPage from "./pages/TimeManagerPage";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -71,6 +72,7 @@ const App = () => (
             <Route path="/hall-pass" element={<Protected el={<HallPassPage />} />} />
             <Route path="/clubs" element={<Protected el={<ClubsPage />} />} />
             <Route path="/time-manager" element={<Protected el={<TimeManagerPage />} />} />
+            <Route path="/admin" element={<Protected el={<AdminDashboard />} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

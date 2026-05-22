@@ -12,8 +12,9 @@ import {
   Menu, 
   X,
   Sparkles, Settings, GraduationCap, ChevronDown, Layers, FolderOpen, Brain, Calendar,
-  Award, TrendingUp, Utensils, Bus, KeyRound, ScrollText, LogOut, School, Users, Clock
+  Award, TrendingUp, Utensils, Bus, KeyRound, ScrollText, LogOut, School, Users, Clock, ShieldAlert
 } from "lucide-react";
+import { useUserRole } from "@/hooks/useUserRole";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -58,6 +59,7 @@ export function Sidebar() {
   const [schoolOpen, setSchoolOpen] = useState(true);
   const location = useLocation();
   const { signOut, user } = useAuth();
+  const { isAdmin } = useUserRole();
 
   const NavItem = ({ icon: Icon, label, path }: { icon: typeof LayoutDashboard; label: string; path: string }) => {
     const isActive = location.pathname === path;
@@ -150,6 +152,7 @@ export function Sidebar() {
 
           <div className="pt-4 border-t border-sidebar-border space-y-1">
             <NavItem icon={Settings} label="Settings" path="/settings" />
+            {isAdmin && <NavItem icon={ShieldAlert} label="Admin" path="/admin" />}
             {user && (
               <button onClick={() => signOut()} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium w-full text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all">
                 <LogOut className="h-5 w-5" />Sign out

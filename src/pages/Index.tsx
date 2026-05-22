@@ -34,6 +34,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { addDays } from "date-fns";
+import { AnnouncementsBanner } from "@/components/AnnouncementsBanner";
 
 const initialTasks: Task[] = [
   { id: "1", title: "Pre-Algebra: Solve linear equations worksheet (pg 178-182)", subject: "Mathematics", dueDate: new Date(), priority: "high", completed: false, type: "assignment" },
@@ -94,6 +95,9 @@ const Index = () => {
             </div>
           </div>
         </header>
+
+        <AnnouncementsBanner />
+
 
         {/* GPA + Student Card */}
         <Card className="bg-gradient-to-r from-primary/10 via-info/5 to-success/10 border-primary/20">

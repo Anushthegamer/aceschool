@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Sun, Moon, Monitor, User, Bell, Palette, Shield, BookOpen, Save, Wifi, Database, Key, Server } from "lucide-react";
+import { Sun, Moon, Monitor, User, Bell, Palette, Shield, BookOpen, Save, Wifi, Database, Key, Server, Code, Layers, Cpu, Globe, Lock, FileCode, Zap } from "lucide-react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -74,6 +74,7 @@ const SettingsPage = () => {
             <TabsTrigger value="notifications" className="gap-2"><Bell className="h-4 w-4" />Notifications</TabsTrigger>
             <TabsTrigger value="preferences" className="gap-2"><BookOpen className="h-4 w-4" />Preferences</TabsTrigger>
             <TabsTrigger value="integrations" className="gap-2"><Wifi className="h-4 w-4" />Integrations</TabsTrigger>
+            <TabsTrigger value="techstack" className="gap-2"><Code className="h-4 w-4" />Tech Stack</TabsTrigger>
           </TabsList>
 
           {/* Profile */}
@@ -284,6 +285,100 @@ const SettingsPage = () => {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          {/* Tech Stack */}
+          <TabsContent value="techstack" className="space-y-4">
+            <Card variant="elevated">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Code className="h-5 w-5 text-primary" />Architecture Overview</CardTitle>
+                <CardDescription>How The Planner is built — for developers and tech professionals</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-xl bg-muted/30 border border-border space-y-3">
+                    <div className="flex items-center gap-2"><Layers className="h-5 w-5 text-primary" /><h4 className="font-semibold text-foreground">Frontend Stack</h4></div>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li className="flex items-start gap-2"><FileCode className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>React 18</strong> — Component-based UI with hooks and functional components</span></li>
+                      <li className="flex items-start gap-2"><FileCode className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Vite 5</strong> — Ultra-fast dev server and optimized production builds</span></li>
+                      <li className="flex items-start gap-2"><FileCode className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>TypeScript 5</strong> — Full type safety across the entire codebase</span></li>
+                      <li className="flex items-start gap-2"><FileCode className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Tailwind CSS v3</strong> — Utility-first styling with custom design tokens</span></li>
+                      <li className="flex items-start gap-2"><FileCode className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>shadcn/ui</strong> — Accessible, composable UI primitives (Radix + Tailwind)</span></li>
+                      <li className="flex items-start gap-2"><FileCode className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Framer Motion</strong> — Declarative animations and layout transitions</span></li>
+                      <li className="flex items-start gap-2"><FileCode className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>React Query (TanStack)</strong> — Server-state caching, synchronization, and background refetching</span></li>
+                    </ul>
+                  </div>
+                  <div className="p-4 rounded-xl bg-muted/30 border border-border space-y-3">
+                    <div className="flex items-center gap-2"><Server className="h-5 w-5 text-primary" /><h4 className="font-semibold text-foreground">Backend & Cloud</h4></div>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li className="flex items-start gap-2"><Database className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Lovable Cloud</strong> — Managed backend with PostgreSQL, Auth, Storage, and Edge Functions</span></li>
+                      <li className="flex items-start gap-2"><Database className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>PostgreSQL 15</strong> — Relational database with row-level security (RLS) policies</span></li>
+                      <li className="flex items-start gap-2"><Zap className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Supabase Edge Functions</strong> — Deno-based serverless functions for custom logic</span></li>
+                      <li className="flex items-start gap-2"><Globe className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Supabase Realtime</strong> — WebSocket-based live updates for collaborative features</span></li>
+                      <li className="flex items-start gap-2"><Cpu className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>AWS S3</strong> — Object storage for file attachments, notes, and media</span></li>
+                      <li className="flex items-start gap-2"><Shield className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>AWS CloudFront</strong> — CDN for global asset delivery (planned)</span></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-muted/30 border border-border space-y-3">
+                  <div className="flex items-center gap-2"><Lock className="h-5 w-5 text-primary" /><h4 className="font-semibold text-foreground">Authentication & Security</h4></div>
+                  <div className="grid sm:grid-cols-2 gap-4 text-sm text-muted-foreground">
+                    <div className="space-y-2">
+                      <p className="flex items-start gap-2"><Shield className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Google OAuth 2.0</strong> — Domain-restricted to <code className="bg-muted px-1 rounded">@edison.k12.nj.us</code></span></p>
+                      <p className="flex items-start gap-2"><Shield className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>JWT Tokens</strong> — Signed access/refresh tokens with automatic rotation</span></p>
+                      <p className="flex items-start gap-2"><Shield className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Row-Level Security</strong> — Every table has RLS policies scoped to <code className="bg-muted px-1 rounded">auth.uid()</code></span></p>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="flex items-start gap-2"><Shield className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Role-Based Access</strong> — Separate <code className="bg-muted px-1 rounded">user_roles</code> table with security-definer functions</span></p>
+                      <p className="flex items-start gap-2"><Shield className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Email Verification</strong> — Required before first sign-in; no anonymous access</span></p>
+                      <p className="flex items-start gap-2"><Shield className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Secure Secrets</strong> — API keys stored server-side; never exposed in client bundles</span></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-muted/30 border border-border space-y-3">
+                  <div className="flex items-center gap-2"><Cpu className="h-5 w-5 text-primary" /><h4 className="font-semibold text-foreground">Data Architecture</h4></div>
+                  <div className="text-sm text-muted-foreground space-y-2">
+                    <p className="flex items-start gap-2"><Database className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Normalized Schema</strong> — Separate tables for assignments, assessments, grades, notes, goals, schedules, and user profiles with foreign-key relationships</span></p>
+                    <p className="flex items-start gap-2"><Database className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Offline-First Design</strong> — localStorage caches critical data; React Query syncs in background</span></p>
+                    <p className="flex items-start gap-2"><Database className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>4-Term Academic Model</strong> — MP1–MP4 marking periods with weighted grading categories</span></p>
+                    <p className="flex items-start gap-2"><Database className="h-4 w-4 mt-0.5 shrink-0" /><span><strong>Activity Logging</strong> — Audit trail for admin dashboard with user actions and timestamps</span></p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-muted/30 border border-border space-y-3">
+                  <div className="flex items-center gap-2"><Globe className="h-5 w-5 text-primary" /><h4 className="font-semibold text-foreground">Deployment & Infrastructure</h4></div>
+                  <div className="grid sm:grid-cols-3 gap-3 text-sm text-muted-foreground">
+                    <div className="p-3 rounded-lg bg-background border border-border text-center">
+                      <Globe className="h-6 w-6 mx-auto mb-2 text-primary" />
+                      <p className="font-medium text-foreground">Lovable Deploy</p>
+                      <p className="text-xs mt-1">Auto-deployed preview + production</p>
+                    </div>
+                    <div className="p-3 rounded-lg bg-background border border-border text-center">
+                      <Database className="h-6 w-6 mx-auto mb-2 text-primary" />
+                      <p className="font-medium text-foreground">PostgreSQL</p>
+                      <p className="text-xs mt-1">Managed by Lovable Cloud</p>
+                    </div>
+                    <div className="p-3 rounded-lg bg-background border border-border text-center">
+                      <Server className="h-6 w-6 mx-auto mb-2 text-primary" />
+                      <p className="font-medium text-foreground">Edge Functions</p>
+                      <p className="text-xs mt-1">Deno runtime, auto-deployed</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 space-y-2">
+                  <p className="text-sm font-medium text-foreground">Built for Edison Middle School students by a fellow student.</p>
+                  <p className="text-xs text-muted-foreground">
+                    The Planner is an open-architecture student productivity platform. All backend logic is implemented via SQL migrations and TypeScript edge functions. Frontend state is managed with React hooks and TanStack Query. No hidden dependencies, no closed-source logic.
+                  </p>
+                  <p className="text-xs text-muted-foreground pt-1">
+                    <strong>Developer:</strong> Ramskandh Thirandasu · <strong>Version:</strong> 2.0 · <strong>License:</strong> All rights reserved © 2026
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
 

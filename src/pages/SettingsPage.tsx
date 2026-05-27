@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Sun, Moon, Monitor, User, Bell, Palette, Shield, BookOpen, Save, Wifi, Database, Key, Server } from "lucide-react";
+import { Sun, Moon, Monitor, User, Bell, Palette, Shield, BookOpen, Save, Wifi, Database, Key, Server, Code, Layers, Cpu, Globe, Lock, FileCode, Zap } from "lucide-react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

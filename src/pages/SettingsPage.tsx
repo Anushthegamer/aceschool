@@ -74,6 +74,7 @@ const SettingsPage = () => {
             <TabsTrigger value="notifications" className="gap-2"><Bell className="h-4 w-4" />Notifications</TabsTrigger>
             <TabsTrigger value="preferences" className="gap-2"><BookOpen className="h-4 w-4" />Preferences</TabsTrigger>
             <TabsTrigger value="integrations" className="gap-2"><Wifi className="h-4 w-4" />Integrations</TabsTrigger>
+            <TabsTrigger value="techstack" className="gap-2"><Code className="h-4 w-4" />Tech Stack</TabsTrigger>
           </TabsList>
 
           {/* Profile */}

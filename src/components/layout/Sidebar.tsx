@@ -68,14 +68,14 @@ export function Sidebar() {
         to={path}
         onClick={() => setIsOpen(false)}
         className={cn(
-          "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+          "flex items-center gap-3 px-3 h-10 rounded-lg text-sm transition-all duration-150",
           isActive
-            ? "bg-sidebar-accent text-sidebar-primary shadow-soft"
-            : "text-sidebar-foreground hover:bg-sidebar-accent/50"
+            ? "bg-sidebar-accent text-foreground font-semibold"
+            : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-foreground font-medium"
         )}
       >
-        <Icon className={cn("h-5 w-5", isActive && "text-sidebar-primary")} />
-        {label}
+        <Icon className={cn("h-[18px] w-[18px] shrink-0", isActive ? "text-primary" : "opacity-70")} strokeWidth={isActive ? 2.25 : 1.75} />
+        <span className="truncate">{label}</span>
       </Link>
     );
   };
@@ -106,15 +106,16 @@ export function Sidebar() {
         )}
       >
         <div className="flex flex-col h-full p-4 overflow-y-auto">
-          <div className="flex items-center gap-3 px-3 py-4 mb-4">
-            <div className="w-10 h-10 rounded-xl gradient-calm flex items-center justify-center shadow-glow glitch-icon">
-              <Sparkles className="h-5 w-5 text-primary-foreground" />
+          <div className="flex items-center gap-3 px-2 py-3 mb-4">
+            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-soft">
+              <Sparkles className="h-[18px] w-[18px] text-primary-foreground" strokeWidth={2.25} />
             </div>
             <div className="min-w-0 flex-1">
-              <h1 className="font-bold text-lg text-sidebar-foreground glitch-text" data-text="The Planner">The Planner</h1>
-              <p className="text-xs text-muted-foreground truncate">8th Grade • Edison</p>
+              <h1 className="font-bold text-[15px] text-foreground leading-tight tracking-tight">The Planner</h1>
+              <p className="text-[11px] text-muted-foreground truncate font-medium">8th Grade · Edison</p>
             </div>
           </div>
+
 
           <nav className="flex-1 space-y-1">
             {mainNav.map((item) => <NavItem key={item.path} {...item} />)}

@@ -1,8 +1,12 @@
+// Desktop — the main OS shell. Renders wallpaper, clock, desktop icons, windows, and taskbar.
+
 import { useState, useEffect } from "react";
 import { useWindowManager } from "@/contexts/WindowManagerContext";
 import { Taskbar } from "./Taskbar";
 import { DesktopIcon, APP_REGISTRY } from "./DesktopIcon";
 import { Window } from "@/components/window/Window";
+
+// lazy-load all app components — keeps initial bundle small
 import { DashboardApp } from "@/components/apps/DashboardApp";
 import { NotesApp } from "@/components/apps/NotesApp";
 import { PomodoroApp } from "@/components/apps/PomodoroApp";
@@ -26,40 +30,23 @@ import { GpaProjectorApp } from "@/components/apps/GpaProjectorApp";
 import { CalendarApp } from "@/components/apps/CalendarApp";
 import { AssessmentsApp } from "@/components/apps/AssessmentsApp";
 
-const APP_COMPONENTS: Record<string, React.ComponentType> = {
-  dashboard: DashboardApp,
-  notes: NotesApp,
-  pomodoro: PomodoroApp,
-  flashcards: FlashcardsApp,
-  "study-planner": StudyPlannerApp,
-  calculator: CalculatorApp,
-  grades: GradesApp,
-  schedule: ScheduleApp,
-  assignments: AssignmentsApp,
-  goals: GoalsApp,
-  resources: ResourcesApp,
-  settings: SettingsApp,
-  "hall-pass": HallPassApp,
-  locker: LockerApp,
-  "bus-tracker": BusTrackerApp,
-  "lunch-menu": LunchMenuApp,
-  clubs: ClubsApp,
-  "time-blocks": TimeBlockApp,
-  "report-card": ReportCardApp,
-  "gpa-projector": GpaProjectorApp,
-  calendar: CalendarApp,
-  assessments: AssessmentsApp,
+const APPS: Record<string, React.ComponentType> = {
+  dashboard: DashboardApp, notes: NotesApp, pomodoro: PomodoroApp,
+  flashcards: FlashcardsApp, "study-planner": StudyPlannerApp, calculator: CalculatorApp,
+  grades: GradesApp, schedule: ScheduleApp, assignments: AssignmentsApp,
+  goals: GoalsApp, resources: ResourcesApp, settings: SettingsApp,
+  "hall-pass": HallPassApp, locker: LockerApp, "bus-tracker": BusTrackerApp,
+  "lunch-menu": LunchMenuApp, clubs: ClubsApp, "time-blocks": TimeBlockApp,
+  "report-card": ReportCardApp, "gpa-projector": GpaProjectorApp,
+  calendar: CalendarApp, assessments: AssessmentsApp,
 };
 
 function ClockWidget() {
   const [now, setNow] = useState(new Date());
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(t);
-  }, []);
+  useEffect(() => { const t = setInterval(() => setNow(new Date()), 1000); return () => clearInterval(t); }, []);
 
-  const hour = now.getHours();
-  const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+  const h = now.getHours();
+  const greeting = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
 
   return (
     <div className="absolute top-8 left-1/2 -translate-x-1/2 text-center pointer-events-none select-none">
@@ -78,9 +65,8 @@ export function Desktop() {
 
   return (
     <div className="fixed inset-0 overflow-hidden">
-      {/* Wallpaper — deep space gradient with aurora accents */}
+      {/* wallpaper — deep space with aurora glows */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#0d1225] to-[#0f0720]">
-        {/* Stars */}
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.3) 0%, transparent 100%),
             radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.2) 0%, transparent 100%),
@@ -88,45 +74,29 @@ export function Desktop() {
             radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.15) 0%, transparent 100%),
             radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.25) 0%, transparent 100%),
             radial-gradient(1.5px 1.5px at 15% 75%, rgba(200,180,255,0.3) 0%, transparent 100%),
-            radial-gradient(1.5px 1.5px at 85% 15%, rgba(180,200,255,0.2) 0%, transparent 100%),
-            radial-gradient(1px 1px at 45% 45%, rgba(255,255,255,0.2) 0%, transparent 100%),
-            radial-gradient(1px 1px at 65% 35%, rgba(255,255,255,0.15) 0%, transparent 100%),
-            radial-gradient(1px 1px at 25% 85%, rgba(255,255,255,0.2) 0%, transparent 100%),
-            radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,0.1) 0%, transparent 100%),
-            radial-gradient(1px 1px at 55% 90%, rgba(255,255,255,0.15) 0%, transparent 100%)`,
+            radial-gradient(1.5px 1.5px at 85% 15%, rgba(180,200,255,0.2) 0%, transparent 100%)`,
         }} />
-        {/* Aurora glow */}
         <div className="absolute top-0 left-0 right-0 h-1/3 overflow-hidden opacity-40">
           <div className="absolute -top-20 left-1/4 w-[500px] h-[300px] bg-violet-600/20 rounded-full blur-[100px] rotate-12" />
           <div className="absolute -top-10 right-1/3 w-[400px] h-[250px] bg-indigo-500/15 rounded-full blur-[80px] -rotate-6" />
-          <div className="absolute top-10 left-1/2 w-[300px] h-[200px] bg-cyan-500/10 rounded-full blur-[60px] rotate-3" />
         </div>
-        {/* Horizon glow */}
         <div className="absolute bottom-12 left-0 right-0 h-32 bg-gradient-to-t from-violet-900/20 to-transparent" />
       </div>
 
-      {/* Clock widget */}
       <ClockWidget />
 
-      {/* Desktop icons */}
+      {/* desktop icons */}
       <div className="absolute inset-0 bottom-14 p-6 pt-44 flex flex-wrap content-start gap-1">
-        {APP_REGISTRY.map((app) => (
-          <DesktopIcon key={app.appKey} {...app} />
-        ))}
+        {APP_REGISTRY.map(app => <DesktopIcon key={app.appKey} {...app} />)}
       </div>
 
-      {/* Windows */}
-      {windows.map((win) => {
-        const AppComponent = APP_COMPONENTS[win.appKey];
-        if (!AppComponent) return null;
-        return (
-          <Window key={win.id} window={win}>
-            <AppComponent />
-          </Window>
-        );
+      {/* open windows */}
+      {windows.map(win => {
+        const Comp = APPS[win.appKey];
+        if (!Comp) return null;
+        return <Window key={win.id} window={win}><Comp /></Window>;
       })}
 
-      {/* Taskbar */}
       <Taskbar />
     </div>
   );

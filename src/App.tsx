@@ -5,16 +5,16 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { WindowManagerProvider } from "@/contexts/WindowManagerContext";
 import { Desktop } from "@/components/desktop/Desktop";
 
-const App = () => (
-  <ThemeProvider>
-    <WindowManagerProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <Desktop />
-      </TooltipProvider>
-    </WindowManagerProvider>
-  </ThemeProvider>
-);
-
-export default App;
+export default function App() {
+  return (
+    <ThemeProvider>
+      <WindowManagerProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Desktop />
+        </TooltipProvider>
+      </WindowManagerProvider>
+    </ThemeProvider>
+  );
+}

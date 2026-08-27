@@ -1,73 +1,64 @@
-# Welcome to your Lovable project
+# Edison OS
 
-## Project info
+A student productivity *WebOS* — a full desktop environment that runs in the browser. Built for the Stardance WebOS 1 hackathon.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Live demo:** deploy with `npm run build && npm run preview`
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## What is this?
 
-**Use Lovable**
+Edison OS is a browser-based operating system for students. It has:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- A real desktop with wallpaper, clock, desktop icons, and a dock
+- **22 apps** that each open in their own draggable, resizable window
+- All data stored client-side in `localStorage` — no account, no backend
+- No login wall. It just works.
 
-Changes made via Lovable will be committed automatically to this repo.
+It started life as "The Planner," a Supabase-backed school productivity app. This version strips out the auth, the server, and the routing, and rebuilds everything as a windowed desktop.
 
-**Use your preferred IDE**
+## Apps
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+| Category | Apps |
+|----------|------|
+| Productivity | Dashboard, Notes, Focus Timer, Flashcards, Study Planner, Calendar |
+| School | Grades, Report Card, GPA Projector, Schedule, Assignments, Assessments, Goals |
+| School life | Hall Pass, Locker, Bus Tracker, Lunch Menu, Clubs, Time Blocks, Resources |
+| System | Calculator, Settings |
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Stack
 
-Follow these steps:
+- React 18 + Vite 5 + TypeScript
+- Tailwind CSS (custom space-themed design)
+- Radix UI primitives + lucide icons
+- sonner for toast notifications
+
+## Running it
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Build for production:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+npm run build
+npm run preview
+```
 
-**Use GitHub Codespaces**
+## How windows work
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The core is `WindowManagerContext` (`src/contexts/WindowManagerContext.tsx`). It keeps an array of open windows — position, size, z-index, minimize/maximize state. The `Window` component in `src/components/window/Window.tsx` handles dragging (title bar) and resizing (bottom-right corner).
 
-## What technologies are used for this project?
+Every app lives in `src/components/apps/` and is registered in `src/components/desktop/DesktopIcon.tsx`. Adding a new app = one component + one registry entry.
 
-This project is built with:
+## Devlogs
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- [Devlog 1 — Converting a Lovable App into a WebOS](devlog-01.md)
+- [Devlog 2 — Building All 22 Apps and the Desktop Experience](devlog-02.md)
+- [Devlog 3 — Cleaning House: Rewriting for Real](devlog-03.md)
 
-## How can I deploy this project?
+## Author
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Ramskandh Thirandasu ([@Anushthegamer](https://github.com/Anushthegamer))

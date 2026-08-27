@@ -1,20 +1,20 @@
+// useLocalStorage — persist state to localStorage. Auto-syncs on change.
+
 import { useState, useEffect } from "react";
 
-export function useLocalStorage<T>(key: string, initialValue: T): [T, React.Dispatch<React.SetStateAction<T>>] {
-  const [storedValue, setStoredValue] = useState<T>(() => {
+export function useLocalStorage<T>(key: string, initial: T): [T, React.Dispatch<React.SetStateAction<T>>] {
+  const [value, setValue] = useState<T>(() => {
     try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      const stored = localStorage.getItem(key);
+      return stored ? JSON.parse(stored) : initial;
     } catch {
-      return initialValue;
+      return initial;
     }
   });
 
   useEffect(() => {
-    try {
-      window.localStorage.setItem(key, JSON.stringify(storedValue));
-    } catch {}
-  }, [key, storedValue]);
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+  }, [key, value]);
 
-  return [storedValue, setStoredValue];
+  return [value, setValue];
 }

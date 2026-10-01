@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { Sparkles, AtSign, Lock, User as UserIcon, ShieldCheck } from "lucide-react";
+import { Sparkles, AtSign, Lock, User as UserIcon, ShieldCheck, UserRound } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 
 const EDISON_DOMAIN = "@edison.k12.nj.us";
@@ -30,6 +30,15 @@ export default function AuthPage() {
   const buildEmail = (local: string) => `${local.trim().toLowerCase().replace(EDISON_DOMAIN, "")}${EDISON_DOMAIN}`;
 
   const validLocal = (local: string) => /^[a-z0-9._-]{2,}$/i.test(local.trim());
+
+  const guestSignIn = async () => {
+    setBusy(true);
+    const { error } = await supabase.auth.signInAnonymously();
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    toast.success("Signed in as guest — your data stays on this device session.");
+    navigate("/");
+  };
 
   const signIn = async () => {
     if (!validLocal(signinLocal)) return toast.error("Enter your Edison username (letters, numbers, . _ -).");

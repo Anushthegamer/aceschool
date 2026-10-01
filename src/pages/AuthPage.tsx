@@ -124,6 +124,20 @@ export default function AuthPage() {
           Continue with Google
         </Button>
 
+        {/* Guest / test access */}
+        <Button
+          variant="secondary"
+          className="w-full h-12 rounded-xl font-medium mt-3 active:scale-[0.98] transition-all"
+          disabled={busy}
+          onClick={guestSignIn}
+        >
+          <UserRound className="h-5 w-5 mr-2" />
+          Try as Guest — no account needed
+        </Button>
+        <p className="text-center text-[11px] text-muted-foreground mt-2">
+          Explore the full app instantly. Guest data is temporary.
+        </p>
+
         {/* Divider */}
         <div className="relative my-7">
           <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-border" /></div>
